@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card {
+        height: 100%;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title,
+    .card-text {
+        margin-bottom: 0.5rem; /* Adjust the margin as needed */
+    }
+</style>
+
+<div class="row">
+    {% for item in p %}
+    <div class="col-md-3">
+        <div class="card mb-4">
+            <img src="{{ item.img.url }}" class="card-img-top" alt="{{ item.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.title }}</h5>
+                <p class="card-text">₹{{ item.price }}</p>
+                <a href="{% url 'myapp:detail' item.id item.slug %}" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

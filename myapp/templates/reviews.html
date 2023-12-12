@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+    <b>{{d.title}}</b><br>
+    {{d.description}}<br>
+    {{d.price}}<br>
+    </div>
+    <div class="col-md-6">
+        <img src="{{d.img.url}}" widt=400 height="500">
+    </div>
+
+</div> 
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" class ="btn btn-primary">
+	</form>
+
+	</div>
+
+</div>
+	<br><br><br>
+	<h6>Reviews:</h6>
+    
+    {% for i in reviews %}
+
+    {{forloop.counter}} - {{i.review}} <br>
+    at {{i.created_at}} by {{i.user}} <br>
+
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
