@@ -35,19 +35,26 @@
               <a class="nav-link" href="#">CATEGORY</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'myapp:cart_view' %}">Cart</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
+              {% if user.is_authenticated %}
+                  <a class="nav-link" href="{% url 'myapp:cart_view' %}">Cart</a>
+              {% endif %}
+          </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" name="q" value="{{request.GET.q}}" placeholder="Search" aria-label="Search">
-            <a href="{% url 'myapp:cart_view' %}" class="btn btn-outline-success my-2 my-sm-0">Cart</a>
-          </form>
-          {% if not user.is_authenticated %}
+            <a href="{% url 'myapp:cart_view' %}" class="btn btn-outline-success my-2 my-sm-0">
+              {% if user.is_authenticated %}
+                  Cart
+              {% endif %}
+          </a>
+      </form>
+
+      {% if not user.is_authenticated %}
           <a class="btn btn-primary" href="{% url 'auth_login' %}">Login</a>
           <a class="btn btn-primary" href="{% url 'registration_register' %}">Register</a>      
-          {% else %}
+      {% else %}
           <a class="btn btn-primary" href="{% url 'auth_logout' %}">Logout</a>
-          {% endif %}
+      {% endif %}
         </div>
     </nav>
     <div class="container">
